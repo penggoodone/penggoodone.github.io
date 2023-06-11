@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Peng 2919570574@qq.com"><title>CUDA · Blog</title><meta name="description" content="CUDA编程
+环境搭建
+第一个程序hello world
+GPU计算
+CPU内部的并行
+指令级并行 ILP
+数据级并行 DLP
+线程级并行 TLP
+同步多线程
+多核
+
+
+锁、一致性、同一性
+结论
+
+
+GPU计算框架
+
+
+基础概念
+粒度、加速比
+并行编程模型
+具体实例
+Amdahl’s Law
+SM
+"><meta name="keywords" content="Blog,博客,Hexo"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.webp"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/insight.css"><link rel="stylesheet" href="/css/search.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="page-top animated fadeInDown"><div class="nav"><li> <a href="/">Home</a></li><li> <a href="/archives">Archives</a></li><li> <a href="/tags">Tags</a></li><li> <a href="/about">About</a></li><li> <a href="/links">Links</a></li></div><div class="information"><div class="nav_right_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li><li><a class="fa fa-search" onclick="openWindow();"></a></li></div><div class="avatar"><img src="/images/logo.webp"></div></div></div><div class="sidebar animated fadeInDown"><div class="sidebar-top"><div class="logo-title"><div class="title"><img src="/images/logo@2x.webp" style="width:220px;" alt="favicon"><h3 title=""><a href="/">Blog</a></h3><div class="description"><p>nothing</p></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/penggoodone"><i class="fa fa-github"></i></a></li><li><a href="mailto:2919570574@qq.com"><i class="fa fa-envelope"></i></a></li></ul></div></div><div class="footer"><div class="p"> <span> 全站CC-BY-SA-3.0 </span><i class="fa fa-star"></i><span> Peng 2919570574@qq.com</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><span>Anatolo </span></div><div class="beian"></div></div></div><div class="main"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>CUDA</a></h3></div><div class="post-content"><p><ul>
+<li><a href="#cuda%E7%BC%96%E7%A8%8B">CUDA编程</a><ul>
+<li><a href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">环境搭建</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8Fhello-world">第一个程序hello world</a></li>
+<li><a href="#gpu%E8%AE%A1%E7%AE%97">GPU计算</a><ul>
+<li><a href="#cpu%E5%86%85%E9%83%A8%E7%9A%84%E5%B9%B6%E8%A1%8C">CPU内部的并行</a><ul>
+<li><a href="#%E6%8C%87%E4%BB%A4%E7%BA%A7%E5%B9%B6%E8%A1%8C-ilp">指令级并行 <em>ILP</em></a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%BA%A7%E5%B9%B6%E8%A1%8C-dlp">数据级并行 <em>DLP</em></a></li>
+<li><a href="#%E7%BA%BF%E7%A8%8B%E7%BA%A7%E5%B9%B6%E8%A1%8C-tlp">线程级并行 <em>TLP</em></a><ul>
+<li><a href="#%E5%90%8C%E6%AD%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B">同步多线程</a></li>
+<li><a href="#%E5%A4%9A%E6%A0%B8">多核</a></li>
+</ul>
+</li>
+<li><a href="#%E9%94%81%E4%B8%80%E8%87%B4%E6%80%A7%E5%90%8C%E4%B8%80%E6%80%A7">锁、一致性、同一性</a></li>
+<li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
+</ul>
+</li>
+<li><a href="#gpu%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6">GPU计算框架</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5">基础概念</a><ul>
+<li><a href="#%E7%B2%92%E5%BA%A6%E5%8A%A0%E9%80%9F%E6%AF%94">粒度、加速比</a></li>
+<li><a href="#%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B">并行编程模型</a></li>
+<li><a href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E4%BE%8B">具体实例</a></li>
+<li><a href="#amdahls-law">Amdahl’s Law</a></li>
+<li><a href="#sm">SM</a></li>
+<li><a href="#gridblockwarpthread">grid、block、warp、thread</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="CUDA编程"><a href="#CUDA编程" class="headerlink" title="CUDA编程"></a>CUDA编程</h2><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><ol>
+<li>需要一台具有英伟达显卡的电脑</li>
+<li>根据系统下载<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exe_local">CUDA Toolkit</a>，进行安装</li>
+<li>下载完成后，在cmd或git bash中输入nvcc -V，下载成功会显示版本<img src="/cuda_version.png" alt="对应版本"></li>
+<li>在vscode中添加cuda扩展 Nsight Visual Studio Code Edition</li>
+<li>安装MSVC编译器，MSVC内置在VS中，所以先安装VS中的一些组件，若果只需要MSVC的话，工作负荷一个也不用勾选。在单个组件里搜索MSVC和Windows 10 SDK<img src="/VS%E5%AE%89%E8%A3%85.png" alt="VS">.</li>
+<li>配置MSVC环境变量，一般都在下载的VS子目录下的VC\Tools\MSVC\14.36.32532\bin\Hostx64\x64，将目录添加到环境变量中</li>
+<li>记住共享组件，工具和SDK的目录，MSVC编译器就在此目录下</li>
+<li>下载完成后，在Developer Command Prompt中输入code打开VScode,注意你需要一下扩展.<br>  <img src="/%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95.png" alt="扩展安装"><br>接下来按住Ctrl + shift + P，选择编辑C&#x2F;C++的配置文件</li>
+</ol>
+<h3 id="第一个程序hello-world"><a href="#第一个程序hello-world" class="headerlink" title="第一个程序hello world"></a>第一个程序hello world</h3><ol>
+<li>在vscode中新建hello_gpu.cu文件，注意后缀名。</li>
+<li>CPU代码</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">cpu</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello cpu\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">gpu</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello gpu\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    cpu();</span><br><span class="line">    gpu();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将函数添加前缀__global__ void cpu(),标识它是一个CUDA程序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">cpu</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello cpu\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">__global__ <span class="type">void</span> <span class="title function_">gpu</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello gpu\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    cpu();</span><br><span class="line">    gpu&lt;&lt;&lt;<span class="number">1</span>,<span class="number">1</span>&gt;&gt;&gt;();</span><br><span class="line">    cudaDeviceSynchronize();<span class="comment">//同步操作</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*__global__关键字表明以下函数将在GPU上运行并可以全局调用，而在这种情况下，则指由CPU或GPU调用。</span></span><br><span class="line"><span class="comment">通常我们在CPU上执行的代码称为主机代码，而将在GPU上运行的代码成为设备代码。</span></span><br><span class="line"><span class="comment">注意返回类型只能为void，使用__global__关键字定义的函数需要返回void类型*/</span></span><br><span class="line"><span class="comment">/*gpu&lt;&lt;&lt;线程块个数，线程个数&gt;&gt;&gt;</span></span><br><span class="line"><span class="comment">通常，当调用GPU上运行的函数时，我们将此种函数称为已启动的核函数。</span></span><br><span class="line"><span class="comment">通常启动核函数时，我们必须提供执行配置，即在向核函数传递任何预期参数之前使用&lt;&lt;&lt;&gt;&gt;&gt;语法完成配置.</span></span><br><span class="line"><span class="comment">从宏观层面，程序员可通过执行配置为核函数启动指定线程层次结构，从而定义线程组(称为线程块)的数量，以及要在每个线程块中执行的线程数量。</span></span><br><span class="line"><span class="comment">本程序只在使用包含1线程(第二个配置参数)的1线程块(第一个执行配置参数)启动核函数</span></span><br><span class="line"><span class="comment">cudaDeviceSynchronize();</span></span><br><span class="line"><span class="comment">核函数启动方式为异步：CPU代码将继续执行而无需等待核函数完成启动。调用CUDA运行时提供的函数cudaDeviceSynchronize将导致主机(CPU)代码暂作等待，直至设备(GPU)代码执行完成，才能在CPU上恢复执行</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>编译程序指令 <code>nvcc -arch=sm_70 -o hello-gpu hello-gpu.cu -run</code></li>
+</ol>
+<blockquote>
+<p>-arch&#x3D;sm_70 代表gpu的架构</p>
+</blockquote>
+<p>查看自己电脑的显卡型号，我所使用的为1050ti为Pascal架构，在<a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html#gpu-generations">官方文档</a>查看该架构所使用的命令<br><img src="/%E6%9E%B6%E6%9E%84%E6%8C%87%E4%BB%A4.png" alt="架构指令"><br>所以我所使用的指令为 <code>nvcc -arch=sm_60 -o hello-gpu hello-gpu.cu -run</code></p>
+<p>报错：无法将“nvcc”项识别为 cmdlet、函数、脚本文件或可运行程序的名称。[^1]<br>报错：出现 <code>Cannot find compiler ‘cl.exe’ in PATH</code>[^2]<br>[^1]:重启电脑，打开命令行终端后，打开vscode进行编译。<a target="_blank" rel="noopener" href="https://www.jb51.net/article/275317.htm">更多解决办法参考</a><br>[^2]:直接安装vs编译器，然后将文件中cl.exe添加到系统环境变量中。或者从VScode中配置msvc，配置<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yT411d78J/?spm_id_from=333.337.search-card.all.click&vd_source=d053eea7792f6ca3156a175fee53c1c0">参考视频</a></p>
+<h3 id="GPU计算"><a href="#GPU计算" class="headerlink" title="GPU计算"></a>GPU计算</h3><h4 id="CPU内部的并行"><a href="#CPU内部的并行" class="headerlink" title="CPU内部的并行"></a>CPU内部的并行</h4><h5 id="指令级并行-ILP"><a href="#指令级并行-ILP" class="headerlink" title="指令级并行 ILP"></a>指令级并行 <em>ILP</em></h5><p>   超标量<br>   乱序执行</p>
+<h5 id="数据级并行-DLP"><a href="#数据级并行-DLP" class="headerlink" title="数据级并行 DLP"></a>数据级并行 <em>DLP</em></h5><p>数据级并行<strong>单指令多数据 <em>SIMD</em></strong>。执行单元 <em>ALU</em> 很宽，寄存器也很宽.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i += <span class="number">4</span>)&#123;</span><br><span class="line">    <span class="comment">//in parallel 并行同时计算</span></span><br><span class="line">    A[i] = B[i] + C[i];</span><br><span class="line">    A[i + <span class="number">1</span>] = B[i + <span class="number">1</span>] + C[i + <span class="number">1</span>];</span><br><span class="line">    A[i + <span class="number">2</span>] = B[i + <span class="number">2</span>] + C[i + <span class="number">2</span>];</span><br><span class="line">    A[i + <span class="number">3</span>] = B[i + <span class="number">3</span>] + C[i + <span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="线程级并行-TLP"><a href="#线程级并行-TLP" class="headerlink" title="线程级并行 TLP"></a>线程级并行 <em>TLP</em></h5><h6 id="同步多线程"><a href="#同步多线程" class="headerlink" title="同步多线程"></a>同步多线程</h6><ol>
+<li>线程组成<br> 指令流<br> 私有的寄存器，程序计数器，栈Private PC,registers,stack</li>
+<li>程序员可以进行创建和销毁</li>
+<li>程序员或者OS都可以调度</li>
+</ol>
+<h6 id="多核"><a href="#多核" class="headerlink" title="多核"></a>多核</h6><ol>
+<li>将流水线完整复制</li>
+<li>Sandy Bridge-E：6 cores<br> 完整的核<br> 继续保持摩尔定理<br> 多核程序和利用率问题</li>
+</ol>
+<h5 id="锁、一致性、同一性"><a href="#锁、一致性、同一性" class="headerlink" title="锁、一致性、同一性"></a>锁、一致性、同一性</h5><p>谁的数据是正确的：缓存一致性协议<br>什么样的数据是正确的：存储器的同一性原理</p>
+<h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><p>CPU为串行程序优化<br>缓慢的内存带宽<br>新的方向：并行处理</p>
+<h4 id="GPU计算框架"><a href="#GPU计算框架" class="headerlink" title="GPU计算框架"></a>GPU计算框架</h4><h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><ol>
+<li>向量运算 <em>Vectors Motivation</em></li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">A[i] = B[i] + C[i];</span><br></pre></td></tr></table></figure>
+
+<h4 id="粒度、加速比"><a href="#粒度、加速比" class="headerlink" title="粒度、加速比"></a>粒度、加速比</h4><h4 id="并行编程模型"><a href="#并行编程模型" class="headerlink" title="并行编程模型"></a>并行编程模型</h4><p>共享存储模型<br>线程模型<br>消息传递模型<br>数据并行模型</p>
+<h4 id="具体实例"><a href="#具体实例" class="headerlink" title="具体实例"></a>具体实例</h4><p>OpenMP<br>MPI<br>Single Program Multiple Data(SPMD)<br>Multiple Program Multiple Data(MPMD)</p>
+<h4 id="Amdahl’s-Law"><a href="#Amdahl’s-Law" class="headerlink" title="Amdahl’s Law"></a>Amdahl’s Law</h4><p>程序的加速比取决于可以被并行化的部分<br>$$speedup &#x3D; 1&#x2F;(1-p)$$<br><em>p</em> 是可并行化的部分，如果全部都可以并行化，<em>p &#x3D; 1</em> and the speedup is infinite<br>如果有N个处理器并行处理$$speedup &#x3D; 1</p>
+<h4 id="SM"><a href="#SM" class="headerlink" title="SM"></a>SM</h4><p>CUDA编程中称核为SM，称ALU为CUDA核，称程序片元为CUDA线程</p>
+<h4 id="grid、block、warp、thread"><a href="#grid、block、warp、thread" class="headerlink" title="grid、block、warp、thread"></a>grid、block、warp、thread</h4><p>软件层级上的概念</p>
+</p><div class="tip">本文采用CC-BY-SA-3.0协议，转载请注明出处<br>Author: Peng 2919570574@qq.com</div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-05-21</span><span class="leancloud_visitors"></span><span>About 1487 words, 4 min 57 sec  read</span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://example.com/2023/05/21/CUDA编程/,Blog,CUDA,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/2023/06/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E8%8D%AF%E7%89%A9%E8%AE%BE%E8%AE%A1/" title="计算机辅助药物设计">Previous</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/04/20/Markdown/" title="Markdown">Next</a></li></ul></div><script src="/js/visitors.js"></script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:"Posts",PAGES:"Pages",CATEGORIES:"Categories",TAGS:"Tags",UNTITLED:"(Untitled)",},CONTENT_URL:"/content.json",};window.INSIGHT_CONFIG=INSIGHT_CONFIG})(window);</script><script src="/js/insight.js" defer></script><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Search..."><span class="searchbox-close"><a class="fa fa-times-circle" onclick="closeWindow();"></a></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"><p>Seraching...</p></div></div></div></div></body></html>

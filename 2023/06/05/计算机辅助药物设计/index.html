@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Peng 2919570574@qq.com"><title>计算机辅助药物设计 · Blog</title><meta name="description" content="药物设计基本概念和理论基础
+药物的化学结构和特性
+基础知识
+基本原理、技术、方法
+受体理论(靶点)
+药物-受体作用方式
+
+
+
+
+药物的发现途径与过程
+经典药物发现的过程
+现代药物的发现过程
+药物发现的途径 — 非合理药物设计
+药物发现的途径 — 合理药物设计
+靶点学说
+基于结构的药物设计(SBDD)"><meta name="keywords" content="Blog,博客,Hexo"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.webp"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/insight.css"><link rel="stylesheet" href="/css/search.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><script src="/js/jquery.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="page-top animated fadeInDown"><div class="nav"><li> <a href="/">Home</a></li><li> <a href="/archives">Archives</a></li><li> <a href="/tags">Tags</a></li><li> <a href="/about">About</a></li><li> <a href="/links">Links</a></li></div><div class="information"><div class="nav_right_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li><li><a class="fa fa-search" onclick="openWindow();"></a></li></div><div class="avatar"><img src="/images/logo.webp"></div></div></div><div class="sidebar animated fadeInDown"><div class="sidebar-top"><div class="logo-title"><div class="title"><img src="/images/logo@2x.webp" style="width:220px;" alt="favicon"><h3 title=""><a href="/">Blog</a></h3><div class="description"><p>nothing</p></div></div><ul class="social-links"><li><a target="_blank" rel="noopener" href="https://github.com/penggoodone"><i class="fa fa-github"></i></a></li><li><a href="mailto:2919570574@qq.com"><i class="fa fa-envelope"></i></a></li></ul></div></div><div class="footer"><div class="p"> <span> 全站CC-BY-SA-3.0 </span><i class="fa fa-star"></i><span> Peng 2919570574@qq.com</span></div><div class="by_farbox"><span>Powered by </span><a href="https://hexo.io/zh-cn/" target="_blank">Hexo </a><span> & </span><span>Anatolo </span></div><div class="beian"></div></div></div><div class="main"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>计算机辅助药物设计</a></h3></div><div class="post-content"><p><ul>
+<li><a href="#%E8%8D%AF%E7%89%A9%E8%AE%BE%E8%AE%A1%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80">药物设计基本概念和理论基础</a><ul>
+<li><a href="#%E8%8D%AF%E7%89%A9%E7%9A%84%E5%8C%96%E5%AD%A6%E7%BB%93%E6%9E%84%E5%92%8C%E7%89%B9%E6%80%A7">药物的化学结构和特性</a><ul>
+<li><a href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">基础知识</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E6%8A%80%E6%9C%AF%E6%96%B9%E6%B3%95">基本原理、技术、方法</a><ul>
+<li><a href="#%E5%8F%97%E4%BD%93%E7%90%86%E8%AE%BA%E9%9D%B6%E7%82%B9">受体理论(靶点)</a></li>
+<li><a href="#%E8%8D%AF%E7%89%A9-%E5%8F%97%E4%BD%93%E4%BD%9C%E7%94%A8%E6%96%B9%E5%BC%8F">药物-受体作用方式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%8D%AF%E7%89%A9%E7%9A%84%E5%8F%91%E7%8E%B0%E9%80%94%E5%BE%84%E4%B8%8E%E8%BF%87%E7%A8%8B">药物的发现途径与过程</a><ul>
+<li><a href="#%E7%BB%8F%E5%85%B8%E8%8D%AF%E7%89%A9%E5%8F%91%E7%8E%B0%E7%9A%84%E8%BF%87%E7%A8%8B">经典药物发现的过程</a></li>
+<li><a href="#%E7%8E%B0%E4%BB%A3%E8%8D%AF%E7%89%A9%E7%9A%84%E5%8F%91%E7%8E%B0%E8%BF%87%E7%A8%8B">现代药物的发现过程</a></li>
+<li><a href="#%E8%8D%AF%E7%89%A9%E5%8F%91%E7%8E%B0%E7%9A%84%E9%80%94%E5%BE%84-----%E9%9D%9E%E5%90%88%E7%90%86%E8%8D%AF%E7%89%A9%E8%AE%BE%E8%AE%A1">药物发现的途径 — 非合理药物设计</a></li>
+<li><a href="#%E8%8D%AF%E7%89%A9%E5%8F%91%E7%8E%B0%E7%9A%84%E9%80%94%E5%BE%84-----%E5%90%88%E7%90%86%E8%8D%AF%E7%89%A9%E8%AE%BE%E8%AE%A1">药物发现的途径 — 合理药物设计</a><ul>
+<li><a href="#%E9%9D%B6%E7%82%B9%E5%AD%A6%E8%AF%B4">靶点学说</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E7%BB%93%E6%9E%84%E7%9A%84%E8%8D%AF%E7%89%A9%E8%AE%BE%E8%AE%A1sbdd">基于结构的药物设计(SBDD)</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E6%80%A7%E8%B4%A8%E7%9A%84%E8%8D%AF%E7%89%A9%E8%AE%BE%E8%AE%A1pbdd%E6%88%90%E8%8D%AF%E6%80%A7%E8%AE%BE%E8%AE%A1%E9%9D%B6%E7%82%B9%E6%9A%B4%E9%9C%B2%E8%8D%AF%E4%BB%A3%E8%8D%AF%E5%8A%A8%E8%A6%81%E6%B1%82%E7%B1%BB%E8%8D%AF%E6%80%A7%E7%BB%93%E6%9E%84%E6%80%A7%E8%B4%A8%E7%9A%84%E5%85%B3%E7%B3%BB">基于性质的药物设计(PBDD成药性设计):靶点暴露(药代&#x2F;药动要求):类药性，结构&#x2F;性质的关系</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E7%89%87%E6%AE%B5%E7%9A%84%E8%8D%AF%E7%89%A9%E8%AE%BE%E8%AE%A1fbdd">基于片段的药物设计(FBDD)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%88%E5%AF%BC%E5%8C%96%E5%90%88%E7%89%A9%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E6%88%90%E8%8D%AF%E6%80%A7%E7%A0%94%E7%A9%B6">先导化合物的优化和成药性研究</a></li>
+</ul>
+</li>
+<li><a href="#%E8%8D%AF%E7%89%A9%E4%BD%9C%E7%94%A8%E7%9A%84%E7%94%9F%E7%89%A9%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A1%80">药物作用的生物化学基础</a></li>
+<li><a href="#%E8%8D%AF%E7%89%A9%E4%BD%9C%E7%94%A8%E7%9A%84%E5%88%86%E5%AD%90%E8%8D%AF%E7%90%86%E5%AD%A6%E5%9F%BA%E7%A1%80">药物作用的分子药理学基础</a></li>
+<li><a href="#%E8%8D%AF%E7%89%A9%E7%9A%84%E5%8C%96%E5%AD%A6%E7%BB%93%E6%9E%84%E4%B8%8E%E7%94%9F%E7%89%A9%E6%B4%BB%E6%80%A7%E7%9A%84%E5%85%B3%E7%B3%BBsar">药物的化学结构与生物活性的关系(SAR)</a></li>
+<li><a href="#%E5%AE%9A%E9%87%8F%E6%9E%84%E6%95%88%E5%85%B3%E7%B3%BBqsar">定量构效关系(QSAR)</a><ul>
+<li><a href="#3%E7%BB%B4%E5%AE%9A%E9%87%8F%E6%9E%84%E6%95%88%E5%85%B3%E7%B3%BB%E7%A0%94%E7%A9%B63d-qsar">3维定量构效关系研究(3D-QSAR)</a></li>
+<li><a href="#%E5%88%86%E5%AD%90%E4%B8%89%E7%BB%B4%E7%BB%93%E6%9E%84%E7%9A%84%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95">分子三维结构的理论计算方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%96%B0%E8%8D%AF%E5%8F%91%E7%8E%B0%E4%B8%AD%E7%9A%84%E5%8C%96%E5%AD%A6%E4%BF%A1%E6%81%AF%E5%AD%A6%E5%92%8C%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6">新药发现中的化学信息学和生物信息学</a><ul>
+<li><a href="#%E8%8D%AF%E7%89%A9%E7%A0%94%E7%A9%B6%E4%B8%AD%E7%9A%84%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86">药物研究中的信息处理</a></li>
+<li><a href="#%E5%8C%96%E5%AD%A6%E5%B0%8F%E5%88%86%E5%AD%90%E7%9A%84%E5%A4%84%E7%90%86">化学小分子的处理</a></li>
+<li><a href="#%E5%88%86%E5%AD%90%E7%9B%B8%E4%BC%BC%E6%80%A7%E6%90%9C%E7%B4%A2">分子相似性搜索</a></li>
+<li><a href="#%E5%90%88%E6%88%90%E5%8F%8D%E5%BA%94%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86%E5%92%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BE%85%E5%8A%A9%E6%9C%89%E6%9C%BA%E5%90%88%E6%88%90%E8%AE%BE%E8%AE%A1">合成反应信息处理和计算机辅助有机合成设计</a></li>
+<li><a href="#%E7%94%9F%E7%89%A9%E5%A4%A7%E5%88%86%E5%AD%90%E7%9A%84%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86">生物大分子的信息处理</a></li>
+<li><a href="#%E4%B8%8E%E6%96%B0%E8%8D%AF%E7%A0%94%E5%8F%91%E6%9C%89%E5%85%B3%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93">与新药研发有关的数据库</a></li>
+<li><a href="#%E4%BF%A1%E6%81%AF%E8%AE%A1%E7%AE%97%E6%96%B0%E6%8A%80%E6%9C%AF">信息计算新技术</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="药物设计基本概念和理论基础"><a href="#药物设计基本概念和理论基础" class="headerlink" title="药物设计基本概念和理论基础"></a>药物设计基本概念和理论基础</h2><h3 id="药物的化学结构和特性"><a href="#药物的化学结构和特性" class="headerlink" title="药物的化学结构和特性"></a>药物的化学结构和特性</h3><h4 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h4><ul>
+<li>&#x3D;&#x3D;计算机辅助药物设计(CADD)&#x3D;&#x3D;:应用各种理论技术方法和分子模拟技术将<a href="#%E5%9F%BA%E4%BA%8E%E7%BB%93%E6%9E%84%E7%9A%84%E8%8D%AF%E7%89%A9%E8%AE%BE%E8%AE%A1sbdd">SBDD</a>的思路以计算机的方法加以实现，是多学科有机结合和综合运用。</li>
+<li>&#x3D;&#x3D;类药性&#x3D;&#x3D;:大部分药物分子具有中等分子量，合适的分子形状和分子柔性…特性。(药物所共同具有的分子结构特征和理化性质)理化性质一般指药物的溶解度、熔点之类的。</li>
+<li>&#x3D;&#x3D;成药性&#x3D;&#x3D;:一个合格的药物应该具有…性质(容易代谢出体外，无毒及不良反应等)</li>
+<li>&#x3D;&#x3D;优势结构&#x3D;&#x3D;:某些高频出现在药物结构片段。</li>
+<li>&#x3D;&#x3D;键能&#x3D;&#x3D;:键长越短，键能越高，分子越稳定。</li>
+</ul>
+<p>以下例子中<br><img src="/%E9%98%BF%E5%8F%B8%E5%8C%B9%E6%9E%97%E7%BB%93%E6%9E%84%E5%BC%8F.jpg" alt="阿司匹林化学结构"><center><font size=2>阿司匹林等药物化学结构式</font></center><br>阿司匹林显酸性，可以发生水解反应更容易代谢出体外(药物代谢的四个途径包括氧化、还原、水解、结合)</p>
+<h4 id="基本原理、技术、方法"><a href="#基本原理、技术、方法" class="headerlink" title="基本原理、技术、方法"></a>基本原理、技术、方法</h4><h5 id="受体理论-靶点"><a href="#受体理论-靶点" class="headerlink" title="受体理论(靶点)"></a>受体理论(靶点)</h5><ol>
+<li>靶点:药物发挥药效，须于机体内具有特定的功能的生物大分子结合(&#x3D;&#x3D;药物与机体内生物大分子的结合部位&#x3D;&#x3D;)。</li>
+<li>一种有效的药物应符合以下两项要求(靶点与药物之间的关系):<br>(1) 作用于靶点(与机体内的某一种或者多种靶点发生相互作用)&#x3D;&#x3D;(药效学要求)&#x3D;&#x3D;。<br>靶点虽然是衔接药物与疾病之间的桥梁，但并不是药物研究的必要条件。比如先发现的药物，后来发现药物靶点(阿司匹林)。<br>(2) 暴露于靶点(药物达到靶点、达到适宜的浓度$C_{max}$)&#x3D;&#x3D;(药物动力学要求)&#x3D;&#x3D;。简言之就是对于药物的吸收情况。<br>(3) 减少脱靶效应(与产生治疗效果的靶点结合称为中靶，与产生治疗效果无关的靶点结合称为脱靶)。其中脱靶有无关的其他靶点和其他组织的无关靶点。<br>(4)例子</li>
+</ol>
+<ul>
+<li>作用于靶点例子:<br>当细胞损伤，细胞释放$磷脂酶A_2$，……网络通路流程。阿司匹林具有解热镇痛抗炎作用。&#x3D;&#x3D;环氧化酶就是阿司匹林的药物靶点，作用机制就是阻断环氧合酶COX的活性。&#x3D;&#x3D;<br><img src="/%E9%98%BF%E5%8F%B8%E5%8C%B9%E6%9E%97%E4%BD%9C%E7%94%A8%E6%9C%BA%E5%88%B6.jpg" alt="阿司匹林作用机制阐明"><center><font size=2>产生前列腺素PGH2合成通路</font></center></li>
+<li>暴露与靶点例子:研制药和仿制药结构相同，但是药效有所不同。血药浓度即药物的吸收情况不同。</li>
+<li>脱靶效应例子:阿司匹林副作用，对胃不好容易便秘等。</li>
+</ul>
+<ol start="3">
+<li>药物靶点的分类<br>  受体、酶、离子通道、细胞因子、核酸、脂质、糖蛋白…</li>
+<li>选择靶点的要求<br>(1)靶点在疾病产生的信号通路上起到关键性的作用，比如阿司匹林中的COX靶点。<br>(2)药物调控所产生的获益要超过它的风险。</li>
+</ol>
+<p>使药物像导弹，具有准确目标，不会伤及其他正常细胞。靶点理论已经成为现代药物发现理论的前提和基础，以靶点假设作为药物设计与发现起点的思想。<br>5. 其他有关</p>
+<ul>
+<li>外源性药物可以作用于受体而干预生理生化作用;内源性药物调节物与受体的相互作用。</li>
+<li>受体激动剂:启动了受体生物学功能，如一些内源性物质(促进受体功能)。</li>
+<li>受体拮抗剂:药物与受体结合后阻碍了内源性物质与受体结合，而导致生物作用的抑制(抑制受体功能)。</li>
+</ul>
+<h5 id="药物-受体作用方式"><a href="#药物-受体作用方式" class="headerlink" title="药物-受体作用方式"></a>药物-受体作用方式</h5><ol>
+<li><p>锁钥原理，互补性<br>配体受体满足空间形状、相互作用力契合(配体受体几何形状的互补、化学性质的互补)</p>
+</li>
+<li><p>诱导契合理论<br>但并不像钥匙和锁一样是刚性的，他们会相互契合，互相适应对方。<br>配体构象变化、受体构象变化<br><img src="/%E8%AF%B1%E5%AF%BC%E5%A5%91%E5%90%881.jpg" alt="qihe"><br>与锁钥模型之间的区别就是刚性柔性区别<br><img src="/%E9%85%8D%E4%BD%93-%E5%8F%97%E4%BD%93%E6%A8%A1%E5%9E%8B.jpg" alt="配体"></p>
+</li>
+<li><p>分子识别:分子间发生专一的相互作用，通过分子间相互作用力而结合</p>
+</li>
+</ol>
+<p>药物通过分子间作用力(&#x3D;&#x3D;可逆&#x3D;&#x3D;)与靶点相结合，某些药物可形成共价键(&#x3D;&#x3D;不可逆&#x3D;&#x3D;)<br>三种主要的分子力:&#x3D;&#x3D;静电作用、氢键相互作用、疏水作用&#x3D;&#x3D;<br>键合类型:</p>
+<ul>
+<li>离子键</li>
+<li>疏水键(两个不溶于水的分子间的相互作用)</li>
+<li>氢键(重要的生物大分子-药物作用方式)</li>
+<li>范德华力(相邻电中性原子之间存在微弱的吸引力)</li>
+<li>螯合作用</li>
+<li>电荷转移(从一个分子轨道转移到另一个分子轨道)</li>
+<li>偶极-偶极作用</li>
+<li>卤键</li>
+<li>阳离子-$\pi$</li>
+<li>共价键(键能高，结合牢，不可逆)</li>
+</ul>
+<p>结合动力学$K_{on}&#x2F;K_{off}$<br>小分子相似性:相似的化学结构具有相近或者相关的活性<br>经典药物化学的基石:生物电子等排、药效团、肽拟似物、过渡态类似物、酶自杀性底物、优势结构…</p>
+<h3 id="药物的发现途径与过程"><a href="#药物的发现途径与过程" class="headerlink" title="药物的发现途径与过程"></a>药物的发现途径与过程</h3><h4 id="经典药物发现的过程"><a href="#经典药物发现的过程" class="headerlink" title="经典药物发现的过程"></a>经典药物发现的过程</h4><p>&#x3D;&#x3D;先导化合物的发现和优化&#x3D;&#x3D;是药物设计最关注的问题和研究重点。<br>先导化合物是具有一定生物活性的<u>新的结构类型</u>&#x3D;&#x3D;化学结构&#x3D;&#x3D;<br><img src="/%E6%96%B0%E8%8D%AF%E7%A0%94%E7%A9%B6%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B.png" alt="新药研究基本流程"><center><font size=2>经典新药研究基本流程</font></center></p>
+<h4 id="现代药物的发现过程"><a href="#现代药物的发现过程" class="headerlink" title="现代药物的发现过程"></a>现代药物的发现过程</h4><p>利用纯化蛋白(靶点)对化合物进行亲和力筛选;筛选出的化合物通过体外功能测试确立;通过疾病动物模型评估药物作用;项目的起点通常为假设疾病靶点，区别于经典药物发现的先导化合物的确定</p>
+<h4 id="药物发现的途径-—-非合理药物设计"><a href="#药物发现的途径-—-非合理药物设计" class="headerlink" title="药物发现的途径 — 非合理药物设计"></a>药物发现的途径 — 非合理药物设计</h4><ol>
+<li>药物的偶然发现与随机筛选<br>随机筛选、定向筛选<br>  筛选模型可以是整体水平、组织器官水平、细胞水平甚至水分子水平，它主要分为体内和体外两大类，体内模拟采用实验动物病理模型实验，一般用于新药开发，体外模型一般用于新药发现。</li>
+</ol>
+<p>高通量筛选<br>  运用筛选模型对大量化合物进行生物活性测定<br>高内涵筛选<br>表型筛选<br>2. 天然有效成分<br>3. 已有药物，药物合成的中间体<br>4. 组成化学方法<br>以群集筛选(库筛选)的方法进行筛选，发展成为超高通量筛选<br>缺少活性分子信息，在库中进行筛选目的是为了找到活性分子，属于随机筛选，当筛选有效结构的化学类似物时，属于定向筛选</p>
+<h4 id="药物发现的途径-—-合理药物设计"><a href="#药物发现的途径-—-合理药物设计" class="headerlink" title="药物发现的途径 — 合理药物设计"></a>药物发现的途径 — 合理药物设计</h4><p>合理药物设计是基于结构的药物设计、基于性质的药物设计和基于机理的药物设计的综合</p>
+<h5 id="靶点学说"><a href="#靶点学说" class="headerlink" title="靶点学说"></a><a href="#%E5%8F%97%E4%BD%93%E7%90%86%E8%AE%BA%E9%9D%B6%E7%82%B9">靶点学说</a></h5><h5 id="基于结构的药物设计-SBDD"><a href="#基于结构的药物设计-SBDD" class="headerlink" title="基于结构的药物设计(SBDD)"></a>基于结构的药物设计(SBDD)</h5><ol>
+<li>基本思想:是根据配体，与生物体内的靶点相互作用产生生物活性，从而治疗靶点相关的疾病。&#x3D;&#x3D;简单说就是药物与靶点结合治疗疾病&#x3D;&#x3D;，例子阿司匹林。</li>
+<li>基本原理:基于受体与配体的&#x3D;&#x3D;锁钥原理&#x3D;&#x3D;，即配体像一把钥匙，受体的活性位点是那锁。</li>
+<li>分类<ul>
+<li>基于受体结构的药物设计，为直接设计方法。(知道活性位点，来制作药物)。</li>
+<li>基于配体结构的药物设计，间接设计方法。主要包括两个内容，第一种是研究系列药物的<a href="#%E5%AE%9A%E9%87%8F%E6%9E%84%E6%95%88%E5%85%B3%E7%B3%BBqsar">定量构效关系</a>，第二种方法是构建共同作用于同一靶点的药效团模型</li>
+</ul>
+</li>
+</ol>
+<h5 id="基于性质的药物设计-PBDD成药性设计-靶点暴露-药代-x2F-药动要求-类药性，结构-x2F-性质的关系"><a href="#基于性质的药物设计-PBDD成药性设计-靶点暴露-药代-x2F-药动要求-类药性，结构-x2F-性质的关系" class="headerlink" title="基于性质的药物设计(PBDD成药性设计):靶点暴露(药代&#x2F;药动要求):类药性，结构&#x2F;性质的关系"></a>基于性质的药物设计(PBDD成药性设计):靶点暴露(药代&#x2F;药动要求):类药性，结构&#x2F;性质的关系</h5><h5 id="基于片段的药物设计-FBDD"><a href="#基于片段的药物设计-FBDD" class="headerlink" title="基于片段的药物设计(FBDD)"></a>基于片段的药物设计(FBDD)</h5><p><img src="/FBDD1.jpg" alt="FBDD解释"><br>白色位置是受体的活性位点，黑色正方形是小的片段，对这个受体具有微弱的活性，但它的分子量很小，在它的活性位点上生长不同活性片段，构建出药物分子<br><img src="/FBDD.jpg" alt="FBDD"><br>选择合适的靶点，根据靶点构建一个片段库(库容量、化学结构的多样性、类药性)，将这个这个片段库，针对靶点进行片段筛选</p>
+<p>先导化合物发现中出现&#x3D;&#x3D;假阳性问题&#x3D;&#x3D;PAINS<br>&#x3D;&#x3D;筛选到的先导化合物中大约5-12%属于非特异性分子。这些分子有不同的类型，有的只具有化学活性，但并没有生物学活性&#x3D;&#x3D;</p>
+<h4 id="先导化合物的优化和成药性研究"><a href="#先导化合物的优化和成药性研究" class="headerlink" title="先导化合物的优化和成药性研究"></a>先导化合物的优化和成药性研究</h4><p>先导化合物药效弱，副作用大等毛病，导致不能直接药用，类似水杨酸；有毒，而且对肠胃有副作用，该药物一般外用。因此需要对先导化合物的结构进行改造和修饰。<br>通过合理设计或随机筛选得到的化合物分子称为&#x3D;&#x3D;命中物&#x3D;&#x3D;</p>
+<h3 id="药物作用的生物化学基础"><a href="#药物作用的生物化学基础" class="headerlink" title="药物作用的生物化学基础"></a>药物作用的生物化学基础</h3><p>结构生物学:从研究生物大分子出发,比如从蛋白质入手，结构生物学为基于结构药物设计奠定了基础。<br>化学生物学:以化学小分子来入手，明确信号传导通路蛋白质功能，发现有关标记及靶点，加深了研究范围和深度。</p>
+<ol>
+<li>蛋白质<br>天然蛋白质又20种标准氨基酸构成</li>
+<li>核酸<br>其基本结构单元是核苷酸，核苷酸由碱基、戊糖和磷酸三部分构成</li>
+<li>酶<br>  具有催化作用的蛋白质</li>
+<li>糖类<br>有机分子</li>
+<li>生物膜<br>  生物体基本结构之一，主要有磷脂和蛋白质构成</li>
+</ol>
+<h3 id="药物作用的分子药理学基础"><a href="#药物作用的分子药理学基础" class="headerlink" title="药物作用的分子药理学基础"></a>药物作用的分子药理学基础</h3><h3 id="药物的化学结构与生物活性的关系-SAR"><a href="#药物的化学结构与生物活性的关系-SAR" class="headerlink" title="药物的化学结构与生物活性的关系(SAR)"></a>药物的化学结构与生物活性的关系(SAR)</h3><h3 id="定量构效关系-QSAR"><a href="#定量构效关系-QSAR" class="headerlink" title="定量构效关系(QSAR)"></a>定量构效关系(QSAR)</h3><h4 id="3维定量构效关系研究-3D-QSAR"><a href="#3维定量构效关系研究-3D-QSAR" class="headerlink" title="3维定量构效关系研究(3D-QSAR)"></a>3维定量构效关系研究(3D-QSAR)</h4><h4 id="分子三维结构的理论计算方法"><a href="#分子三维结构的理论计算方法" class="headerlink" title="分子三维结构的理论计算方法"></a>分子三维结构的理论计算方法</h4><p><img src="/%E5%88%86%E5%AD%90%E4%B8%89%E7%BB%B4%E7%BB%93%E6%9E%84%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%951.jpg" alt="3D"><br>理论计算方法(量子化学,分子力学)</p>
+<hr>
+<h2 id="新药发现中的化学信息学和生物信息学"><a href="#新药发现中的化学信息学和生物信息学" class="headerlink" title="新药发现中的化学信息学和生物信息学"></a>新药发现中的化学信息学和生物信息学</h2><h3 id="药物研究中的信息处理"><a href="#药物研究中的信息处理" class="headerlink" title="药物研究中的信息处理"></a>药物研究中的信息处理</h3><h3 id="化学小分子的处理"><a href="#化学小分子的处理" class="headerlink" title="化学小分子的处理"></a>化学小分子的处理</h3><h3 id="分子相似性搜索"><a href="#分子相似性搜索" class="headerlink" title="分子相似性搜索"></a>分子相似性搜索</h3><h3 id="合成反应信息处理和计算机辅助有机合成设计"><a href="#合成反应信息处理和计算机辅助有机合成设计" class="headerlink" title="合成反应信息处理和计算机辅助有机合成设计"></a>合成反应信息处理和计算机辅助有机合成设计</h3><h3 id="生物大分子的信息处理"><a href="#生物大分子的信息处理" class="headerlink" title="生物大分子的信息处理"></a>生物大分子的信息处理</h3><h3 id="与新药研发有关的数据库"><a href="#与新药研发有关的数据库" class="headerlink" title="与新药研发有关的数据库"></a>与新药研发有关的数据库</h3><h3 id="信息计算新技术"><a href="#信息计算新技术" class="headerlink" title="信息计算新技术"></a>信息计算新技术</h3><hr>
+<p>主要参考了复旦大学药物设计学课程、计算机辅助药物设计导论第二版</p>
+</p><div class="tip">本文采用CC-BY-SA-3.0协议，转载请注明出处<br>Author: Peng 2919570574@qq.com</div></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2023-06-05</span><i class="fa fa-tag"></i><a class="tag" href="/tags/⾃⼰的理解总结概括，不要抄/" title="⾃⼰的理解总结概括，不要抄">⾃⼰的理解总结概括，不要抄 </a><span class="leancloud_visitors"></span><span>About 3353 words, 11 min 10 sec  read</span></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="" onclick="javascript:join_favorite()" ref="sidebar"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=,http://example.com/2023/06/05/计算机辅助药物设计/,Blog,计算机辅助药物设计,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/2023/05/21/CUDA%E7%BC%96%E7%A8%8B/" title="CUDA">Next</a></li></ul></div><script src="/js/visitors.js"></script></div></div></div></div><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/add-bookmark.js"></script><script>(function(window){var INSIGHT_CONFIG={TRANSLATION:{POSTS:"Posts",PAGES:"Pages",CATEGORIES:"Categories",TAGS:"Tags",UNTITLED:"(Untitled)",},CONTENT_URL:"/content.json",};window.INSIGHT_CONFIG=INSIGHT_CONFIG})(window);</script><script src="/js/insight.js" defer></script><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Search..."><span class="searchbox-close"><a class="fa fa-times-circle" onclick="closeWindow();"></a></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"><p>Seraching...</p></div></div></div></div></body></html>
